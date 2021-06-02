@@ -47,7 +47,7 @@ module TogglV8
         sleep(DELAY_SEC)
       end
 
-      raise full_resp.headers['warning'] if full_resp.headers['warning']
+      raise full_resp.headers['warning'] if full_resp.headers['warning'] && !full_resp.headers['warning'].match?(/Deprecation Notice\. Toggl Track API wont be available in this domain after June 2021/)
       raise "HTTP Status: #{full_resp.status}" unless full_resp.success?
       return {} if full_resp.body.nil? || full_resp.body == 'null'
 
